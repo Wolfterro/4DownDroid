@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">4DownDroid</string>
+
+    <string name="insertURLofThread">Insira a URL do tópico:</string>
+    <string name="threadURL">URL do tópico</string>
+    <string name="threadURLPlaceholder">http://boards.4chan.org/BOARD/thread/ID</string>
+    <string name="checkThread">Verificar Tópico</string>
+
+    <string name="posts">Posts: </string>
+    <string name="files">Arquivos: </string>
+    <string name="images">Imagens: </string>
+    <string name="videos">Vídeos: </string>
+    <string name="archived">Arquivado: </string>
+
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+
+    <string name="outputDir">Pasta de destino:</string>
+    <string name="downloadFiles">Baixar Arquivos</string>
+    <string name="beginDownloadOfFiles">Iniciando download dos arquivos</string>
+
+    <string name="errorRecoveringInformation">Erro ao recuperar informações:</string>
+    <string name="errorInvalidWebsite">Erro! Website inválido!</string>
+    <string name="errorThreadNeedsToBeInserted">Erro! Um tópico precisa ser inserido e verificado antes de prosseguir!</string>
+
+    <string name="downloadingFiles">Baixando arquivos...</string>
+    <string name="standByWhileFilesAreBeingDownloaded">Aguarde enquanto os arquivos do tópico estão sendo baixados</string>
+    <string name="thisCanTakeAWhile">Isto pode demorar um pouco...</string>
+
+    <string name="filesSavedIn">Arquivos salvos em </string>
+
+</resources>

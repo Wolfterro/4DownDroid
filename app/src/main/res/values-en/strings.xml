@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">4DownDroid</string>
+
+    <string name="insertURLofThread">Insert URL of thread:</string>
+    <string name="threadURL">Thread URL</string>
+    <string name="threadURLPlaceholder">http://boards.4chan.org/BOARD/thread/ID</string>
+    <string name="checkThread">Check Thread</string>
+
+    <string name="posts">Posts: </string>
+    <string name="files">Files: </string>
+    <string name="images">Images: </string>
+    <string name="videos">Videos: </string>
+    <string name="archived">Archived: </string>
+
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <string name="outputDir">Output directory:</string>
+    <string name="downloadFiles">Download Files</string>
+    <string name="beginDownloadOfFiles">Initiating download of files</string>
+
+    <string name="errorRecoveringInformation">Error while recovering information:</string>
+    <string name="errorInvalidWebsite">Error! Invalid website!</string>
+    <string name="errorThreadNeedsToBeInserted">Error! A thread needs to be inserted and checked before proceeding!</string>
+
+    <string name="downloadingFiles">Downloading files...</string>
+    <string name="standByWhileFilesAreBeingDownloaded">Stand by while the files are being downloaded</string>
+    <string name="thisCanTakeAWhile">This can take a while...</string>
+
+    <string name="filesSavedIn">Files saved in </string>
+
+</resources>
