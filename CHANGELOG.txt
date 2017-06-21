@@ -1,0 +1,19 @@
+4DownDroid
+==========
+
+Um simples aplicativo que baixa imagens e vídeos do 4chan!
+----------------------------------------------------------
+
+CHANGELOG:
+==========
+
+VERSÃO 1.1:
+- Adicionado novo método de atualização de mensagens durante o download.
+--- O método irá informar o nome do arquivo, seu index e o número total de arquivos a serem baixados.
+
+#-------------------------------------------------------------------------------------------------------------------
+
+VERSÃO 1.0:
+- Versão inicial do aplicativo.
+
+#-------------------------------------------------------------------------------------------------------------------

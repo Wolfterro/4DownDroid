@@ -48,6 +48,8 @@ public class DownloadFilesThread extends Thread {
     // =====================
     private ProgressDialog down = null;
     private Context c = null;
+    private String newMessage = "";
+    private String downloadMessage = "";
 
     // Propriedades protegidas
     // =======================
@@ -62,6 +64,7 @@ public class DownloadFilesThread extends Thread {
         this.tDir = tDir;
         this.down = down;
         this.c = c;
+        this.downloadMessage = c.getString(R.string.standByWhileFilesAreBeingDownloaded);
     }
 
     @Override
@@ -76,7 +79,11 @@ public class DownloadFilesThread extends Thread {
                 filename = FilenameUtils.getName(uf.getPath());
                 File nf = new File(tDir + "/" + filename);
 
+                newMessage = String.format("%s\n\n%s - [%d/%d]",
+                        downloadMessage, filename, i, dURLList.size());
+
                 if(!nf.exists()) {
+                    updateMsg.sendEmptyMessage(0);
                     FileUtils.copyURLToFile(uf, nf, 10000, 10000);
                 }
             }
@@ -89,6 +96,13 @@ public class DownloadFilesThread extends Thread {
         }
         handler.sendEmptyMessage(0);
     }
+
+    private Handler updateMsg = new Handler() {
+        @Override
+        public void handleMessage(Message m) {
+            down.setMessage(newMessage);
+        }
+    };
 
     private Handler handler = new Handler() {
         @Override
