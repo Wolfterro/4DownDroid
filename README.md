@@ -17,6 +17,8 @@
 
 <img src="http://i.imgur.com/iuzxR18.png" width="45%" height="45%" />
 
+### [Verifique o CHANGELOG.txt para maiores informações sobre novas versões!](https://raw.githubusercontent.com/Wolfterro/4DownDroid/master/CHANGELOG.txt)
+
 ### Idiomas Disponíveis:
  - Português Brasileiro (Padrão)
  - Inglês
