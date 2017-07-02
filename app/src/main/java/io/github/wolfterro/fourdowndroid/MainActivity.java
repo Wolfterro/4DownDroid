@@ -25,14 +25,19 @@ SOFTWARE.
 package io.github.wolfterro.fourdowndroid;
 
 import android.app.ProgressDialog;
+import android.content.pm.PackageManager;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.Manifest;
 
 import java.io.File;
 import java.util.List;
@@ -47,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
     private Button button1;         // Verificar Tópico
     private Button button2;         // Download dos Arquivos
 
+    private CheckBox checkBox;      // Substituir arquivos existentes
+
     private TextView textView1;     // Posts
     private TextView textView2;     // Arquivos
     private TextView textView3;     // Imagens
@@ -60,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
     private String board = "";
     private List<String> dURLList = null;
     private String chosenDir = "";
+    private final int PERMISSION_GRANTED_VALUE = 0;
 
     // Confirmação antes de prosseguir com o download dos arquivos
     // -----------------------------------------------------------
@@ -76,11 +84,23 @@ public class MainActivity extends AppCompatActivity {
         button1 = (Button)findViewById(R.id.button);
         button2 = (Button)findViewById(R.id.button2);
 
+        checkBox = (CheckBox)findViewById(R.id.checkBox);
+
         textView1 = (TextView)findViewById(R.id.textView2);
         textView2 = (TextView)findViewById(R.id.textView3);
         textView3 = (TextView)findViewById(R.id.textView4);
         textView4 = (TextView)findViewById(R.id.textView5);
         textView5 = (TextView)findViewById(R.id.textView6);
+
+        // Pedindo permissão de acesso ao armazenamento do aparelho para o usuário
+        // =======================================================================
+        if(ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    PERMISSION_GRANTED_VALUE);
+        }
 
         // Definindo o local padrão para o salvamento dos arquivos
         // =======================================================
@@ -222,7 +242,9 @@ public class MainActivity extends AppCompatActivity {
                     down.setCancelable(false);
                     down.show();
 
-                    DownloadFilesThread dft = new DownloadFilesThread(dURLList, tDir, down,
+                    DownloadFilesThread dft = new DownloadFilesThread(dURLList,
+                            checkBox.isChecked(),
+                            tDir, down,
                             MainActivity.this);
                     dft.start();
                 }
@@ -236,5 +258,23 @@ public class MainActivity extends AppCompatActivity {
 
         // =========================================================================================
         // =========================================================================================
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[],
+                                            int[] grantResults) {
+        switch(requestCode) {
+            case PERMISSION_GRANTED_VALUE: {
+                if(grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Nada por enquanto
+                }
+                else {
+                    Toast.makeText(MainActivity.this,
+                            getString(R.string.errorNoPermissionGiven),
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        }
     }
 }

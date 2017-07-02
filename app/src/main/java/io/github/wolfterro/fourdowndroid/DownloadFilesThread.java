@@ -50,6 +50,7 @@ public class DownloadFilesThread extends Thread {
     private Context c = null;
     private String newMessage = "";
     private String downloadMessage = "";
+    private boolean replaceFiles = false;
 
     // Propriedades protegidas
     // =======================
@@ -58,9 +59,14 @@ public class DownloadFilesThread extends Thread {
 
     // Construtor da classe
     // ====================
-    public DownloadFilesThread(List<String> dURLList, String tDir,
-                               ProgressDialog down, Context c) {
+    public DownloadFilesThread(List<String> dURLList,
+                               boolean replaceFiles,
+                               String tDir,
+                               ProgressDialog down,
+                               Context c) {
+
         this.dURLList = dURLList;
+        this.replaceFiles = replaceFiles;
         this.tDir = tDir;
         this.down = down;
         this.c = c;
@@ -85,6 +91,12 @@ public class DownloadFilesThread extends Thread {
                 if(!nf.exists()) {
                     updateMsg.sendEmptyMessage(0);
                     FileUtils.copyURLToFile(uf, nf, 10000, 10000);
+                }
+                else {
+                    if(replaceFiles) {
+                        updateMsg.sendEmptyMessage(0);
+                        FileUtils.copyURLToFile(uf, nf, 10000, 10000);
+                    }
                 }
             }
             catch (MalformedURLException e) {

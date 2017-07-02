@@ -16,9 +16,11 @@
     <string name="no">Não</string>
 
     <string name="outputDir">Pasta de destino:</string>
+    <string name="replaceExistingFiles">Substituir arquivos existentes</string>
     <string name="downloadFiles">Baixar Arquivos</string>
     <string name="beginDownloadOfFiles">Iniciando download dos arquivos</string>
 
+    <string name="errorNoPermissionGiven">Erro! O aplicativo não poderá funcionar sem as devidas permissões!</string>
     <string name="errorRecoveringInformation">Erro ao recuperar informações:</string>
     <string name="errorInvalidWebsite">Erro! Website inválido!</string>
     <string name="errorThreadNeedsToBeInserted">Erro! Um tópico precisa ser inserido e verificado antes de prosseguir!</string>

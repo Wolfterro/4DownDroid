@@ -17,9 +17,11 @@
     <string name="no">No</string>
 
     <string name="outputDir">Output directory:</string>
+    <string name="replaceExistingFiles">Replace existing files</string>
     <string name="downloadFiles">Download Files</string>
     <string name="beginDownloadOfFiles">Initiating download of files</string>
 
+    <string name="errorNoPermissionGiven">Error! The application cannot work correctly without the desired permissions!</string>
     <string name="errorRecoveringInformation">Error while recovering information:</string>
     <string name="errorInvalidWebsite">Error! Invalid website!</string>
     <string name="errorThreadNeedsToBeInserted">Error! A thread needs to be inserted and checked before proceeding!</string>

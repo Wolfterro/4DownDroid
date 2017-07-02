@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorMaterialDark"
     tools:context="io.github.wolfterro.fourdowndroid.MainActivity">
 
     <ScrollView
@@ -30,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/insertURLofThread"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/white" />
 
             <EditText
                 android:id="@+id/editText"
@@ -41,7 +42,8 @@
                 android:inputType="textPersonName"
                 android:singleLine="true"
                 android:text="@string/threadURLPlaceholder"
-                android:textColor="?attr/actionMenuTextColor"
+                android:textColor="@android:color/white"
+                android:theme="@style/editTextCustom"
                 android:textSize="16sp" />
 
             <Button
@@ -55,7 +57,7 @@
                 android:layout_height="1dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
-                android:background="@android:color/darker_gray" />
+                android:background="@color/colorWhite" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -63,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:text="@string/posts"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:textSize="16sp" />
 
             <TextView
@@ -72,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:text="@string/files"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:textSize="16sp" />
 
             <TextView
@@ -81,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:text="@string/images"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:textSize="16sp" />
 
             <TextView
@@ -90,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:text="@string/videos"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:textSize="16sp" />
 
             <TextView
@@ -98,7 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/archived"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:textSize="16sp" />
 
             <View
@@ -106,14 +108,14 @@
                 android:layout_height="1dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
-                android:background="@android:color/darker_gray" />
+                android:background="@color/colorWhite" />
 
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/outputDir"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/white" />
 
             <EditText
                 android:id="@+id/editText2"
@@ -124,7 +126,8 @@
                 android:ems="10"
                 android:inputType="none"
                 android:singleLine="true"
-                android:textColor="?attr/actionMenuTextColor"
+                android:textColor="@android:color/white"
+                android:theme="@style/editTextCustom"
                 android:textSize="16dp" />
 
             <View
@@ -132,12 +135,21 @@
                 android:layout_height="1dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
-                android:background="@android:color/darker_gray" />
+                android:background="@color/colorWhite" />
+
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/replaceExistingFiles"
+                android:textColor="@android:color/white"  />
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="@string/downloadFiles" />
 
         </LinearLayout>
