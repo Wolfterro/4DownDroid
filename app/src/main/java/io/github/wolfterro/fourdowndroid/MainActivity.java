@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
     // Elementos da Activity Principal
     // ===============================
     private EditText editText1;     // URL do tópico
-    private EditText editText2;     // Pasta de destino
 
     private Button button1;         // Verificar Tópico
     private Button button2;         // Download dos Arquivos
@@ -59,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView textView3;     // Imagens
     private TextView textView4;     // Vídeos
     private TextView textView5;     // Arquivado
+    private TextView textView6;     // Pasta de destino
 
     // Propriedades de classes do aplicativo
     // =====================================
@@ -79,18 +79,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         editText1 = (EditText)findViewById(R.id.editText);
-        editText2 = (EditText)findViewById(R.id.editText2);
 
         button1 = (Button)findViewById(R.id.button);
         button2 = (Button)findViewById(R.id.button2);
 
         checkBox = (CheckBox)findViewById(R.id.checkBox);
 
-        textView1 = (TextView)findViewById(R.id.textView2);
-        textView2 = (TextView)findViewById(R.id.textView3);
-        textView3 = (TextView)findViewById(R.id.textView4);
-        textView4 = (TextView)findViewById(R.id.textView5);
-        textView5 = (TextView)findViewById(R.id.textView6);
+        textView1 = (TextView)findViewById(R.id.textViewPostsValue);
+        textView2 = (TextView)findViewById(R.id.textViewFilesValue);
+        textView3 = (TextView)findViewById(R.id.textViewImagesValue);
+        textView4 = (TextView)findViewById(R.id.textViewVideosValue);
+        textView5 = (TextView)findViewById(R.id.textViewArchivedValue);
+        textView6 = (TextView)findViewById(R.id.textViewOutputDirValue);
 
         // Pedindo permissão de acesso ao armazenamento do aparelho para o usuário
         // =======================================================================
@@ -106,12 +106,12 @@ public class MainActivity extends AppCompatActivity {
         // =======================================================
         if(Environment.getExternalStorageState() == null) {
             chosenDir = Environment.getDataDirectory().getAbsolutePath() + "/4DownDroid/";
-            editText2.setText(chosenDir);
+            textView6.setText(chosenDir);
         }
         else {
             chosenDir = Environment.getExternalStorageDirectory()
                     .getAbsolutePath() + "/4DownDroid/";
-            editText2.setText(chosenDir);
+            textView6.setText(chosenDir);
         }
 
         File mainDir = new File(chosenDir);
@@ -130,11 +130,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Limpando informações sobre o tópico
                 // ===================================
-                textView1.setText(String.format("%s %s", getString(R.string.posts), ""));
-                textView2.setText(String.format("%s %s", getString(R.string.files), ""));
-                textView3.setText(String.format("%s %s", getString(R.string.images), ""));
-                textView4.setText(String.format("%s %s", getString(R.string.videos), ""));
-                textView5.setText(String.format("%s %s", getString(R.string.archived), ""));
+                textView1.setText(getString(R.string.notAvailable));
+                textView2.setText(getString(R.string.notAvailable));
+                textView3.setText(getString(R.string.notAvailable));
+                textView4.setText(getString(R.string.notAvailable));
+                textView5.setText(getString(R.string.notAvailable));
                 threadOK = false;
                 dURLList = null;
                 id = "";
@@ -176,17 +176,15 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if(tit.GetThreadInfoStatus.equals("OK")) {
-                    textView1.setText(String.format("%s %s", getString(R.string.posts), tit.NumPosts));
-                    textView2.setText(String.format("%s %s", getString(R.string.files), tit.NumFiles));
-                    textView3.setText(String.format("%s %s", getString(R.string.images), tit.NumImages));
-                    textView4.setText(String.format("%s %s", getString(R.string.videos), tit.NumVideos));
+                    textView1.setText(String.format("%s", tit.NumPosts));
+                    textView2.setText(String.format("%s", tit.NumFiles));
+                    textView3.setText(String.format("%s", tit.NumImages));
+                    textView4.setText(String.format("%s", tit.NumVideos));
                     if(tit.isArchived) {
-                        textView5.setText(String.format("%s %s", getString(R.string.archived),
-                                getString(R.string.yes)));
+                        textView5.setText(String.format("%s", getString(R.string.yes)));
                     }
                     else {
-                        textView5.setText(String.format("%s %s", getString(R.string.archived),
-                                getString(R.string.no)));
+                        textView5.setText(String.format("%s", getString(R.string.no)));
                     }
 
                     files = tit.Files;
