@@ -1,23 +1,33 @@
 <resources>
-    <string name="app_name">4DownDroid</string>
+    <!-- Não traduzir! Do not translate! -->
+    <string name="app_name" translatable="false">4DownDroid</string>
+    <string name="app_version" translatable="false">1.4</string>
+    <string name="fourDownDroidRepo" translatable="false">https://github.com/Wolfterro/4DownDroid</string>
+    <!-- =============================== -->
+
+    <string name="about">Sobre</string>
+    <string name="about4DownDroid">Sobre 4DownDroid</string>
+    <string name="aboutText">4DownDroid é um simples aplicativo que possui a função de verificar
+        informações de tópicos do 4chan e baixar os arquivos disponíveis no tópico.</string>
+    <string name="aboutLicensed">Este aplicativo foi disponibilizado sob os termos da licença MIT.</string>
 
     <string name="insertURLofThread">Insira a URL do tópico</string>
     <string name="threadURL">URL do tópico</string>
     <string name="threadURLPlaceholder">http://boards.4chan.org/BOARD/thread/ID</string>
     <string name="checkThread">Verificar Tópico</string>
 
-    <string name="posts">Posts</string>
-    <string name="files">Arquivos</string>
-    <string name="images">Imagens</string>
-    <string name="videos">Vídeos</string>
-    <string name="archived">Arquivado</string>
+    <string name="posts">Posts:</string>
+    <string name="files">Arquivos:</string>
+    <string name="images">Imagens:</string>
+    <string name="videos">Vídeos:</string>
+    <string name="archived">Arquivado:</string>
+    <string name="outputDir">Pasta de destino</string>
 
     <string name="notAvailable">N/D</string>
 
     <string name="yes">Sim</string>
     <string name="no">Não</string>
 
-    <string name="outputDir">Pasta de destino</string>
     <string name="replaceExistingFiles">Substituir arquivos existentes</string>
     <string name="downloadFiles">Baixar Arquivos</string>
     <string name="beginDownloadOfFiles">Iniciando download dos arquivos</string>
@@ -26,6 +36,9 @@
     <string name="errorRecoveringInformation">Erro ao recuperar informações:</string>
     <string name="errorInvalidWebsite">Erro! Website inválido!</string>
     <string name="errorThreadNeedsToBeInserted">Erro! Um tópico precisa ser inserido e verificado antes de prosseguir!</string>
+
+    <string name="obtainingInformations">Obtendo informações</string>
+    <string name="pleaseWait">Por favor, aguarde...</string>
 
     <string name="downloadingFiles">Baixando arquivos...</string>
     <string name="standByWhileFilesAreBeingDownloaded">Aguarde enquanto os arquivos do tópico estão sendo baixados</string>

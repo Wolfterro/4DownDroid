@@ -7,6 +7,14 @@ Um simples aplicativo que baixa imagens e vídeos do 4chan!
 CHANGELOG:
 ==========
 
+VERSÃO 1.4:
+- Alterada aparência do aplicativo novamente (espero que seja a última :P).
+- Adicionada janela sobre o aplicativo.
+- ProgressDialog adicionado ao verificar informações do tópico.
+- Bugfixes e pequenas alterações no código do programa.
+
+#-------------------------------------------------------------------------------------------------------------------
+
 VERSÃO 1.3:
 - Alterada aparência do aplicativo.
 

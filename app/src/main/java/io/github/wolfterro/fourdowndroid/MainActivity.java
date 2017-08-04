@@ -25,12 +25,16 @@ SOFTWARE.
 package io.github.wolfterro.fourdowndroid;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -40,7 +44,6 @@ import android.widget.Toast;
 import android.Manifest;
 
 import java.io.File;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -62,17 +65,39 @@ public class MainActivity extends AppCompatActivity {
 
     // Propriedades de classes do aplicativo
     // =====================================
-    private List<String> files = null;
-    private String id = "";
-    private String board = "";
-    private List<String> dURLList = null;
-    private String chosenDir = "";
-    private final int PERMISSION_GRANTED_VALUE = 0;
+    protected String chosenDir = "";
+    protected final int PERMISSION_GRANTED_VALUE = 0;
 
     // Confirmação antes de prosseguir com o download dos arquivos
     // -----------------------------------------------------------
-    private boolean threadOK = false;
+    private GetThreadInfoThread tit = null;
 
+    // Menu de opções da activity principal
+    // ====================================
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.option_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    // Selecionando opções no menu da activity principal
+    // =================================================
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.about:
+                Intent about = new Intent(MainActivity.this, AboutActivity.class);
+                MainActivity.this.startActivity(about);
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    // Criando activity principal do aplicativo
+    // ========================================
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,6 +153,13 @@ public class MainActivity extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ProgressDialog pd = new ProgressDialog(MainActivity.this);
+
+                pd.setTitle(getString(R.string.obtainingInformations));
+                pd.setMessage(getString(R.string.pleaseWait));
+                pd.setCancelable(false);
+                pd.show();
+
                 // Limpando informações sobre o tópico
                 // ===================================
                 textView1.setText(getString(R.string.notAvailable));
@@ -135,11 +167,6 @@ public class MainActivity extends AppCompatActivity {
                 textView3.setText(getString(R.string.notAvailable));
                 textView4.setText(getString(R.string.notAvailable));
                 textView5.setText(getString(R.string.notAvailable));
-                threadOK = false;
-                dURLList = null;
-                id = "";
-                board = "";
-                files = null;
                 // ====================================
 
                 String apiURL = "";
@@ -149,6 +176,7 @@ public class MainActivity extends AppCompatActivity {
                     if(!fau.getURLHost().equals(GlobalVars.Host)) {
                         String err = String.format("%s", getString(R.string.errorInvalidWebsite));
                         Toast.makeText(MainActivity.this, err, Toast.LENGTH_SHORT).show();
+                        pd.dismiss();
 
                         return;
                     }
@@ -157,51 +185,19 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 else {
-                    String err = String.format("%s %s", getString(R.string.errorRecoveringInformation),
+                    String err = String.format("%s %s",
+                            getString(R.string.errorRecoveringInformation),
                             fau.FourAPIURLStatus);
                     Toast.makeText(MainActivity.this, err, Toast.LENGTH_SHORT).show();
+                    pd.dismiss();
 
                     return;
                 }
 
                 // Iniciando resgate de valores do tópico
                 // ======================================
-                GetThreadInfoThread tit = new GetThreadInfoThread(apiURL);
+                tit = new GetThreadInfoThread(apiURL, MainActivity.this, pd);
                 tit.start();
-                try {
-                    tit.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    return;
-                }
-
-                if(tit.GetThreadInfoStatus.equals("OK")) {
-                    textView1.setText(String.format("%s", tit.NumPosts));
-                    textView2.setText(String.format("%s", tit.NumFiles));
-                    textView3.setText(String.format("%s", tit.NumImages));
-                    textView4.setText(String.format("%s", tit.NumVideos));
-                    if(tit.isArchived) {
-                        textView5.setText(String.format("%s", getString(R.string.yes)));
-                    }
-                    else {
-                        textView5.setText(String.format("%s", getString(R.string.no)));
-                    }
-
-                    files = tit.Files;
-                    FourDownloadURL fdu = new FourDownloadURL(apiURL, files);
-                    id = fdu.id;
-                    board = fdu.board;
-                    dURLList = fdu.getDownloadURLList();
-
-                    threadOK = true;
-                }
-                else {
-                    String err = String.format("%s %s",
-                            getString(R.string.errorRecoveringInformation),
-                            tit.GetThreadInfoStatus);
-
-                    Toast.makeText(MainActivity.this, err, Toast.LENGTH_SHORT).show();
-                }
             }
         });
 
@@ -213,38 +209,49 @@ public class MainActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(threadOK) {
-                    // Criando ou acessando pasta do tópico
-                    // ------------------------------------
-                    String threadDirName = String.format("Thread-[%s-%s]", board, id);
-                    String tDir = String.format("%s%s", chosenDir, threadDirName);
-                    File threadDir = new File(tDir);
+                if(tit != null) {
+                    if(tit.getThreadOK()) {
+                        // Criando ou acessando pasta do tópico
+                        // ------------------------------------
+                        String threadDirName = String.format("Thread-[%s-%s]",
+                                tit.getBoard(),
+                                tit.getID());
 
-                    if(threadDir.isDirectory()) {
-                        System.setProperty("user.dir", tDir);
+                        String tDir = String.format("%s%s", chosenDir, threadDirName);
+                        File threadDir = new File(tDir);
+
+                        if(threadDir.isDirectory()) {
+                            System.setProperty("user.dir", tDir);
+                        }
+                        else {
+                            threadDir.mkdirs();
+                            System.setProperty("user.dir", tDir);
+                        }
+
+                        // Iniciando resgate de valores do tópico
+                        // ======================================
+                        ProgressDialog down = new ProgressDialog(MainActivity.this);
+
+                        down.setTitle(getString(R.string.downloadingFiles));
+                        down.setMessage(String.format("%s\n\n%s",
+                                getString(R.string.standByWhileFilesAreBeingDownloaded),
+                                getString(R.string.thisCanTakeAWhile)));
+
+                        down.setCancelable(false);
+                        down.show();
+
+                        DownloadFilesThread dft = new DownloadFilesThread(tit.getDURLList(),
+                                checkBox.isChecked(),
+                                tDir,
+                                down,
+                                MainActivity.this);
+                        dft.start();
                     }
                     else {
-                        threadDir.mkdirs();
-                        System.setProperty("user.dir", tDir);
+                        Toast.makeText(MainActivity.this,
+                                getString(R.string.errorThreadNeedsToBeInserted),
+                                Toast.LENGTH_SHORT).show();
                     }
-
-                    // Iniciando resgate de valores do tópico
-                    // ======================================
-                    ProgressDialog down = new ProgressDialog(MainActivity.this);
-
-                    down.setTitle(getString(R.string.downloadingFiles));
-                    down.setMessage(String.format("%s\n\n%s",
-                            getString(R.string.standByWhileFilesAreBeingDownloaded),
-                            getString(R.string.thisCanTakeAWhile)));
-
-                    down.setCancelable(false);
-                    down.show();
-
-                    DownloadFilesThread dft = new DownloadFilesThread(dURLList,
-                            checkBox.isChecked(),
-                            tDir, down,
-                            MainActivity.this);
-                    dft.start();
                 }
                 else {
                     Toast.makeText(MainActivity.this,
@@ -257,6 +264,9 @@ public class MainActivity extends AppCompatActivity {
         // =========================================================================================
         // =========================================================================================
     }
+
+    // =============================================================================================
+    // =============================================================================================
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[],

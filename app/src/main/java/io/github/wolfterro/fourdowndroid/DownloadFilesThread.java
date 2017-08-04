@@ -85,8 +85,8 @@ public class DownloadFilesThread extends Thread {
                 filename = FilenameUtils.getName(uf.getPath());
                 File nf = new File(tDir + "/" + filename);
 
-                newMessage = String.format("%s\n\n%s - [%d/%d]",
-                        downloadMessage, filename, i, dURLList.size());
+                newMessage = String.format("%s\n\n[%d/%d] %s",
+                        downloadMessage, i, dURLList.size(), filename);
 
                 if(!nf.exists()) {
                     updateMsg.sendEmptyMessage(0);

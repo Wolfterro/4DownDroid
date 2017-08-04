@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">4DownDroid</string>
+
+    <string name="about">About</string>
+    <string name="about4DownDroid">About 4DownDroid</string>
+    <string name="aboutText">4DownDroid is a simple app that it\'s main function is to verify thread
+        informations from 4chan and download the available files in the thread.</string>
+    <string name="aboutLicensed">This app was released under the terms of the MIT License.</string>
 
     <string name="insertURLofThread">Insert URL of thread</string>
     <string name="threadURL">Thread URL</string>
     <string name="threadURLPlaceholder">http://boards.4chan.org/BOARD/thread/ID</string>
     <string name="checkThread">Check Thread</string>
 
-    <string name="posts">Posts</string>
-    <string name="files">Files</string>
-    <string name="images">Images</string>
-    <string name="videos">Videos</string>
-    <string name="archived">Archived</string>
+    <string name="posts">Posts:</string>
+    <string name="files">Files:</string>
+    <string name="images">Images:</string>
+    <string name="videos">Videos:</string>
+    <string name="archived">Archived:</string>
+    <string name="outputDir">Output directory</string>
 
     <string name="notAvailable">N/A</string>
 
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
-    <string name="outputDir">Output directory</string>
     <string name="replaceExistingFiles">Replace existing files</string>
     <string name="downloadFiles">Download Files</string>
     <string name="beginDownloadOfFiles">Initiating download of files</string>
@@ -27,6 +32,9 @@
     <string name="errorRecoveringInformation">Error while recovering information:</string>
     <string name="errorInvalidWebsite">Error! Invalid website!</string>
     <string name="errorThreadNeedsToBeInserted">Error! A thread needs to be inserted and checked before proceeding!</string>
+
+    <string name="obtainingInformations">Obtaining informations</string>
+    <string name="pleaseWait">Please wait...</string>
 
     <string name="downloadingFiles">Downloading files...</string>
     <string name="standByWhileFilesAreBeingDownloaded">Stand by while the files are being downloaded</string>
