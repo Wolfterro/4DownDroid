@@ -17,7 +17,7 @@
 
 <br />
 
-<img src="http://i.imgur.com/h9J6RR2.png" width="45%" height="45%" />
+<img src="http://i.imgur.com/evxgYEH.png" />
 
 ### [Verifique o CHANGELOG.txt para maiores informações sobre novas versões!](https://raw.githubusercontent.com/Wolfterro/4DownDroid/master/CHANGELOG.txt)
 
@@ -26,6 +26,7 @@
  - Inglês
 
 ### Permissões Necessárias:
+ - Acesso à Internet
  - Acesso/Escrita do Armazenamento Interno
 
 ### Download:
@@ -35,6 +36,6 @@
     cd 4DownDroid/
 
 ##### Caso queira baixar o aplicativo já compilado, em formato .apk, use o link abaixo:
-#### ***Release:*** https://github.com/Wolfterro/4DownDroid/releases/tag/v1.3-Release
+#### ***Release:*** https://github.com/Wolfterro/4DownDroid/releases/tag/v1.4-Release
 
 ###### Caso não possua o git e queira baixar o repositório, baixe através deste [Link](https://github.com/Wolfterro/4DownDroid/archive/master.zip) ou clique em "Clone or Download", no topo da página.
