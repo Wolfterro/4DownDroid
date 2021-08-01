@@ -28,9 +28,9 @@ public class GlobalVars {
     public static String[] ImageTypes = {"jpg", "jpeg", "png", "gif", "pdf"};
     public static String[] VideoTypes = {"webm", "mp4", "swf"};
 
-    public static String apiURL1 = "http://a.4cdn.org";
+    public static String apiURL1 = "https://a.4cdn.org";
     public static String jsonExt = ".json";
-    public static String dURL = "http://i.4cdn.org";
+    public static String dURL = "https://i.4cdn.org";
 
     public static String Host = "boards.4chan.org";
 }

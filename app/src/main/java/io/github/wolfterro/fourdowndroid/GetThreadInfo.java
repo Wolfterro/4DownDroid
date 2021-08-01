@@ -24,11 +24,17 @@ SOFTWARE.
 
 package io.github.wolfterro.fourdowndroid;
 
+import android.util.Log;
+
 import java.io.*;
 import java.net.*;
 import java.util.*;
 
 import org.json.*;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class GetThreadInfo {
 
@@ -64,27 +70,19 @@ public class GetThreadInfo {
     // e se o tópico está arquivado.
     // ===============================================
     public void init() {
-        try {
-            url = new URL(this.apiURL);
-            conn = (HttpURLConnection) url.openConnection();
-            conn.connect();
+        OkHttpClient client = new OkHttpClient();
 
-            stream = (InputStream) conn.getContent();
+        Request request = new Request.Builder().url(this.apiURL).build();
+        String res = "";
+        try {
+            Response response = client.newCall(request).execute();
+            res = response.body().string();
         }
-        catch (MalformedURLException e) {
-            e.printStackTrace();
-            GetThreadInfoStatus = "MALFORMED_URL_EXCEPTION";
-            return;
-        } catch (IOException e) {
+        catch (java.io.IOException e) {
             e.printStackTrace();
             GetThreadInfoStatus = "NOT_FOUND_INNACESSIBLE_OR_UNAVAILABLE";
             return;
         }
-
-        Scanner s = new Scanner(stream);
-        s.useDelimiter("\\A");
-        String res = s.hasNext() ? s.next() : "";
-        s.close();
 
         JSONObject obj = null;
         JSONArray arr = null;
