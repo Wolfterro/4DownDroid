@@ -36,9 +36,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.Manifest;
@@ -49,19 +51,20 @@ public class MainActivity extends AppCompatActivity {
 
     // Elementos da Activity Principal
     // ===============================
-    private EditText editText1;     // URL do tópico
+    private EditText editTextBoardNum;  // URL do tópico
+    private Spinner boardSpinner;       // DropDown das Boards
 
-    private Button button1;         // Verificar Tópico
-    private Button button2;         // Download dos Arquivos
+    private Button button1;             // Verificar Tópico
+    private Button button2;             // Download dos Arquivos
 
-    private CheckBox checkBox;      // Substituir arquivos existentes
+    private CheckBox checkBox;          // Substituir arquivos existentes
 
-    private TextView textView1;     // Posts
-    private TextView textView2;     // Arquivos
-    private TextView textView3;     // Imagens
-    private TextView textView4;     // Vídeos
-    private TextView textView5;     // Arquivado
-    private TextView textView6;     // Pasta de destino
+    private TextView textView1;         // Posts
+    private TextView textView2;         // Arquivos
+    private TextView textView3;         // Imagens
+    private TextView textView4;         // Vídeos
+    private TextView textView5;         // Arquivado
+    private TextView textView6;         // Pasta de destino
 
     // Propriedades de classes do aplicativo
     // =====================================
@@ -103,7 +106,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        editText1 = (EditText)findViewById(R.id.editText);
+        boardSpinner = (Spinner)findViewById(R.id.boardSpinner);
+        editTextBoardNum = (EditText)findViewById(R.id.editTextBoardNum);
 
         button1 = (Button)findViewById(R.id.button);
         button2 = (Button)findViewById(R.id.button2);
@@ -116,6 +120,11 @@ public class MainActivity extends AppCompatActivity {
         textView4 = (TextView)findViewById(R.id.textViewVideosValue);
         textView5 = (TextView)findViewById(R.id.textViewArchivedValue);
         textView6 = (TextView)findViewById(R.id.textViewOutputDirValue);
+
+        // Inserindo boards na lista
+        // =========================
+        ArrayAdapter<String> adapter = new ArrayAdapter(this, R.layout.spinner_item, GlobalVars.boardsList);
+        boardSpinner.setAdapter(adapter);
 
         // Pedindo permissão de acesso ao armazenamento do aparelho para o usuário
         // =======================================================================
@@ -170,7 +179,10 @@ public class MainActivity extends AppCompatActivity {
                 // ====================================
 
                 String apiURL = "";
-                FourAPIURL fau = new FourAPIURL(editText1.getText().toString());
+                String threadNum = editTextBoardNum.getText().toString();
+                String board = boardSpinner.getSelectedItem().toString();
+
+                FourAPIURL fau = new FourAPIURL(board, threadNum);
 
                 if(fau.FourAPIURLStatus == 0) {
                     if(!fau.getURLHost().equals(GlobalVars.Host)) {

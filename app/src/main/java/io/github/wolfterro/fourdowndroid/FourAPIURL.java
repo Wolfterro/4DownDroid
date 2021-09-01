@@ -28,6 +28,8 @@ package io.github.wolfterro.fourdowndroid;
  * Created by Wolfterro on 15/06/2017.
  */
 
+import android.util.Log;
+
 import java.net.*;
 
 public class FourAPIURL {
@@ -35,14 +37,16 @@ public class FourAPIURL {
     // =======================
     protected int FourAPIURLStatus = 0;
 
-    protected String url = "";
+    protected String board = "";
+    protected String threadNum = "";
     protected String host = "";
     protected String apiURL = "";
 
     // Construtor da classe
     // ====================
-    public FourAPIURL(String url) {
-        this.url = url;
+    public FourAPIURL(String board, String threadNum) {
+        this.board = board;
+        this.threadNum = threadNum;
         convertURL();
     }
 
@@ -53,8 +57,10 @@ public class FourAPIURL {
     // =============================================
     private void convertURL() {
         URL u = null;
+        String urlAssembled = assembleUrl();
+
         try {
-            u = new URL(url);
+            u = new URL(urlAssembled);
         } catch (MalformedURLException e) {
             e.printStackTrace();
             return;
@@ -72,6 +78,16 @@ public class FourAPIURL {
         else {
             apiURL = String.format("%s%s%s", GlobalVars.apiURL1, u.getPath(), GlobalVars.jsonExt);
         }
+        Log.println(Log.INFO, "CHECK THIS THING TOO!", apiURL);
+    }
+
+    private String assembleUrl() {
+        String[] splittedBoard = this.board.split(" - ");
+        String selectedBoard = splittedBoard[0];
+
+        String url = String.format("https://boards.4chan.org%sthread/%s", selectedBoard, this.threadNum);
+        Log.println(Log.INFO, "CHECK THIS THING OUT!", url);
+        return url;
     }
 
     // Métodos públicos

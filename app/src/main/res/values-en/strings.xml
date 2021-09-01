@@ -8,9 +8,12 @@
     <string name="aboutLicensed">This app was released under the terms of the MIT License.</string>
 
     <string name="insertURLofThread">Insert URL of thread</string>
+    <string name="selectBoard">Select board</string>
+    <string name="selectBoardPlaceholder">123456</string>
     <string name="threadURL">Thread URL</string>
-    <string name="threadURLPlaceholder">http://boards.4chan.org/BOARD/thread/ID</string>
+    <string name="threadURLPlaceholder">https://boards.4chan.org/BOARD/thread/ID</string>
     <string name="checkThread">Check Thread</string>
+    <string name="insertThreadNum">Insert thread number</string>
 
     <string name="posts">Posts:</string>
     <string name="files">Files:</string>

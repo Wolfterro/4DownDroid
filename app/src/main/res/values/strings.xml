@@ -1,7 +1,7 @@
 <resources>
     <!-- Não traduzir! Do not translate! -->
     <string name="app_name" translatable="false">4DownDroid</string>
-    <string name="app_version" translatable="false">1.4</string>
+    <string name="app_version" translatable="false">1.6</string>
     <string name="fourDownDroidRepo" translatable="false">https://github.com/Wolfterro/4DownDroid</string>
     <!-- =============================== -->
 
@@ -12,9 +12,12 @@
     <string name="aboutLicensed">Este aplicativo foi disponibilizado sob os termos da licença MIT.</string>
 
     <string name="insertURLofThread">Insira a URL do tópico</string>
+    <string name="selectBoard">Selecione a board</string>
+    <string name="selectBoardPlaceholder">123456</string>
     <string name="threadURL">URL do tópico</string>
-    <string name="threadURLPlaceholder">http://boards.4chan.org/BOARD/thread/ID</string>
+    <string name="threadURLPlaceholder">https://boards.4chan.org/BOARD/thread/ID</string>
     <string name="checkThread">Verificar Tópico</string>
+    <string name="insertThreadNum">Insira o número da thread</string>
 
     <string name="posts">Posts:</string>
     <string name="files">Arquivos:</string>

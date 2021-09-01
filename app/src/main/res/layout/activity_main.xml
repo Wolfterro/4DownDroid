@@ -30,21 +30,39 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/insertURLofThread"
+                android:text="@string/selectBoard"
+                android:textColor="?attr/colorAccent"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/boardSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="36dp"
+                android:textSize="12sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:id="@+id/textViewSelectThreadNum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/insertThreadNum"
                 android:textColor="?attr/colorAccent"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/editTextBoardNum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="15dp"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:singleLine="true"
-                android:text="@string/threadURLPlaceholder"
+                android:text="@string/selectBoardPlaceholder"
                 android:textColor="@android:color/white"
                 android:theme="@style/editTextCustom"
                 android:textSize="16sp"
