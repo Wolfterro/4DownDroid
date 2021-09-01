@@ -36,6 +36,6 @@
     cd 4DownDroid/
 
 ##### Caso queira baixar o aplicativo já compilado, em formato .apk, use o link abaixo:
-#### ***Release:*** https://github.com/Wolfterro/4DownDroid/releases/tag/v1.4-Release
+#### ***Release:*** https://github.com/Wolfterro/4DownDroid/releases/tag/v1.6-Release
 
 ###### Caso não possua o git e queira baixar o repositório, baixe através deste [Link](https://github.com/Wolfterro/4DownDroid/archive/master.zip) ou clique em "Clone or Download", no topo da página.
